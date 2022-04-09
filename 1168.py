@@ -16,3 +16,9 @@ while dq:
 sys.stdout.write("<"+", ".join(result)+">")
 
 print("<"+", ".join(result)+">")
+
+
+count = 0 
+
+print(input_num,"의 약수 : ", end='') 
+
