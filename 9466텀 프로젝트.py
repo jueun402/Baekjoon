@@ -27,47 +27,35 @@
 # 3
 # 0
 
-def dfs(graph,v,visited):
-    global result # 탐색 순서 저장 
+#---------------------------- 풀이 -----------------------------#
 
-    if pick == graph[v]:
-        return
-    visited[v] = True # node 방문 
-    result += str(v)  # dfs 탐색한 팀원들 담기 
-    pick = graph[v]   # 팀 하고 싶은 팀원
-    print(v , end=' ')
-
-    # 만약 방문했는데 
-    if visited[pick] and :
-
-    # 팀 하고 싶은 팀원 연결해서 탐색하기 
-    if not visited[pick]:
-        dfs(graph,pick,visited)
-
+# 텀 프로젝트
 import sys
-sys.setrecursionlimit(10**7)
+input = sys.stdin.readline
+sys.setrecursionlimit(1000000) # recursion 제한 늘리기  
 
-t = int(input())
+def dfs(x):
+    global result # 팀을 이룬 학생 수 저장 
+    visited[x] = True # x 학생 방문 처리  
+    cycle.append(x)  # 팀에 x 학생 저장 
+    if visited[student[x]]: # x가 같이 팀하고 싶은 사람을 이미 방문했다면  
+        if student[x] in cycle: # x가 고른 사람이 이미 cycle에 있다면 => x가 y(student[x])를 고름으로써 cycle을 형성
+            result += cycle[cycle.index(student[x]):] # x가 처음 등장한 index부터 cycle 끝까지의 길이 = cycle을 이루는 팀원의 수 
+        return
+    else:
+        dfs(student[x])
 
-for _ in range(t):
-    # input
-    n = int(sys.stdin.readline()) # 학생 수 
-    st_numb = [0]+list(map(int,sys.stdin.readline().split())) # 선택된 학생 번호 
-    visited = [False]*(n+1) # visited 초기화 
-    teamStd = 0 # 프로젝트 팀에 속한 학생 수 
 
-       
-    # dfs 탐색 
-    for i in range(1, n+1):
+T = int(input())
+for _ in range(T):
+    N = int(input())
+    student = [0]+list(map(int, input().split()))
+    visited = [False] * (N+1)
+    result = []
+
+    for i in range(1, N+1):
         if not visited[i]:
-            # team result 초기화 
-            result = ""
-            dfs(st_numb,i,visited)
+            cycle = []
+            dfs(i)
 
-            # 마지막에 탐색한 숫자와 시작 숫자가 같다면 
-            if i == st_numb[int(result[-1])]:
-                print("순회", i)
-                # 팀 생성한 학생수 count 
-                teamStd += len(list(result))
-
-    print(n-teamStd)
+    print(N-len(result))
