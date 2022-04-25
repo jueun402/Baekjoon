@@ -15,7 +15,7 @@ for i in card_to_find:
 
 #-----------------------------------------------------------------#
 
-# 풀이 2. 이분탐색 활용 
+# 풀이 2. 이분탐색 활용 => 시간초과 ㅠ 
 
 # 상근이가 갖고있는 숫자
 N = int(input())
@@ -53,7 +53,35 @@ for target in ary:
     print(binary_search(target,card), end=' ')
         
 # card를 count하는 부분에서 시간초과가 났다
-# start와 end의 범위 만 탐색해 count해서 해결했따.
+# start와 end의 범위 만 탐색해 count해서 해결하려했는데 시간초과... 
+
+
+#-----------------------------------------------------------------#
+# 풀이3. 해쉬맵 
+
+
 # https://chancoding.tistory.com/45 
 # 이 분의 해설을 보니 이분탐색 보다 위에 counter 함수를 사용한게 메모리나 시간이 더 적었다.
 # hash를 사용한 방법도 고안해보자 
+
+
+# 상근이가 갖고있는 숫자
+N = int(input())
+
+card = list(map(int,input().split()))
+
+# 정수 M개
+M = int(input())
+ary = list(map(int,input().split()))
+
+hashmap = {}
+
+for i in card:
+    if i in hashmap:
+        hashmap[i] +=1
+    else:
+        hashmap[i] = 1
+
+for target in ary:
+    try:
+        print(hashmap[target])
