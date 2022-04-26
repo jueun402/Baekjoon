@@ -1,3 +1,2 @@
 # Baekjoon
-Algorithm 풀이
-
+백준 문제 풀이 
