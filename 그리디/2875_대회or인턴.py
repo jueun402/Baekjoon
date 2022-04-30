@@ -19,87 +19,38 @@
 n,m,k = map(int,input().split())
 result = 0
 
-
-
-for i in range(1, min(n//2, m)+1):
-    print(i)
+# 여자 2명 , 남자 1명 남아있고, 인턴쉽 참여 인원 보다 한 팀을 더 만들 수 있을 때  
+while n >= 2 and m >=1 and n+m >= k+3:
+    n -=2 # 여자 2
+    m -=1 # 남자 1
+    result +=1 # 팀으로 만들어준다 
     
-    
+print(result)
+
+# 후기 : 이 풀이는 답을 봤다. 하루를 꼬박 고민했는데 못풀었다... 
+# 인턴쉽 인원을 하나씩 체크해서 제거하는 답으로 풀었었는데, 시간초과가 났었다
+# 위 풀이대로 3명씩 팀을 만들어주는 방법으로 고안해봤다면 쉽게 풀렸을 텐데! 
+# 공부하자! 
+
+#----------------------------- 시간 초과 ---------------------
+
 while True:
     
     # 여학생의 수가 더 많으면 
-    if n//2 >= m:
+    if n//2 > m:
         # 여학생 한명씩 인턴쉽 참가 인원에 추가 
         n -=1 
         k -=1
         max_team = min((n)//2,m)
 
     # 남학생의 수가 더 많으면 
-    elif n//2 <m:
+    elif n//2 < m:
         # 남학생 한명씩 인턴쉽 참가 인원에 추가 
         m -=1 
         k -=1
         max_team = min((n)//2,m)
     
-    if k == 0:
+    if k <= 0:
         break
-
 print(max_team)
 
-
-# 반례 존재 
-3 6 6
-
-3-1 6-5 6 
-2 1 0
-1 
-
-
-# 1. min값을 구하고 
-
-can_join = n+m-k # 대회 참가 가능 인원
-
-
-# 최대로 만들 수 있는 만큼 만들고 빼면 어떨까? 
-
-# 1. 일단 쌍을 만들자 
-max_team = min((n-k)//2,m)
-print(max_team)
-
-# 2. 비교 
-# 팀을 만들 수 있는 인원  >   대회 참가 가능한 인원 
-# == 팀을 만들 수 있는 인원이 더 많다면( = 대회 참가 인원이 부족)
-if max_team*2 + max_team > can_join:
-    # 3명의 인원(2+1)을 인턴쉽 참가 인원에 추가하기 
-    max_team -=1 
-    k -=3
-    
-    # 여학생 인원을 필요한 만큼 줄이기 (인턴쉽에 참가)
-    ## 남학생은 한명이 팀 하나를 담당 => 여학생을 인턴쉽 참가 인원에 추가하는게 최대 팀 생성
-    max_team = min(n//2,m)
-    n -= (max_team*2 + max_team - can_join) 
-print(max_team)
-
-
-
-# 여, 남, 인턴쉽 참가 
-n,m,k = map(int,input().split())
-
-# 대회 최대 참가 가능 인원  
-max_team = min((n)//2,m)
-
-while True:
-    can_join = n+m-k # 대회 참가 가능 인원
-    # 팀을 만들 수 있는 인원  >   대회 참가 가능한 인원 
-    # == 팀을 만들 수 있는 인원이 더 많다면( = 대회 참가 인원이 부족)
-    if max_team*3 > can_join:
-        print(max_team*3, can_join)
-        max_team -=1 
-        k -=3
-    else:
-        print(max_team)
-        break
-    
-    if k <=0:     
-        print(max_team)
-        break
