@@ -19,77 +19,43 @@
 
 #----------------------------------------------- 풀이 ---------------------------------------------------------#
 
-# 풀이 생각
-# 1. timetable을 si순서대로 정렬해놓는거지 
-# 2. s1의 t1보다 s2가 작다 => 강의실 1개 추가 
-# 3. 
-# 
-# s1 다음 s2가 작아 => 강의실 1개 추가 
-# 3. 
+# bfs로 풀어야 하나.. 고민하다가 우선순위큐 문제라길래 풀이를 참고했다.. ㅎㅎ 
 
+# 문제 풀이 방법은 단순하다.
+# 1. 첫 강의 종료 시간과 두번재 회의 시작 시간 비교 
+# 2. 만약, 첫 강의 종료 시간 보다 두번째 강의 시작 시간이 크면 강의시간을 연장한다.
+#    - 강의를 연장하는 방법은 우선순위 queue를 사용한다.
+#    - 현재 강의 시간을 새로운 강의 시간으로 변경하기 위해 우선순위큐를 pop한 뒤, 새로운 강의 시간을 queue에 넣어준다.
 
-# queue에 넣고 search..?
-
-n = int(input())
-timetable = []
-for i in range(n):
-    s, t = input().split()
-    timetable.append([int(s),int(t)])
-
-sorttime = sorted(timetable)
-
-for i in range(len(sorttime)):
-    print(i)
-
-from collections import deque
-
-queue = deque([])
-queue.append(sorttime[0])
-
-visited = [False]*len(sorttime)
-
-def bfs(sorttime,v,visited):
-    queue = deque([])
-    visited[v] = True
-    queue.append(sorttime[v])
-            
-    while queue:
-        s1,t1 = queue.popleft()    
-        
-        v = 0
-        for i in range(v+1,len(sorttime)):
-            print(sorttime[i])
-            s2, t2 = i
-            if t1 <= s2:
-                queue.append()
-            print(s1,t1)
-            
-            
-#######################################################
+# 3. 만약, 첫 강의 종료 시간 보다 두번째 강의 시작 시간이 작으면 새로운 강의실을 추가해준다.
+# 4. 2번과 3번 내용을 강의를 돌면서 반복한다. 
+# https://hongcoding.tistory.com/79 이 분의 풀이를 참고하였다! 
 
 import heapq
 
 n = int(input())
+lect = []
 
-timetable = []
-
+# 강의 입력 
 for i in range(n):
-    s, t = map(int,input().split())
-    timetable.append([s,t])
+    s,t = map(int,input().split())
+    lect.append([s,t])
 
-timetable.sort()
+# 강의 시작 시간 기준 정렬 
+lect.sort()
 
 room = []
-heapq.heappush(room,timetable[0][1])
+heapq.heappush(room,lect[0][1]) # 첫 강의 종료 시간 
 
-sorttime = sorted(timetable)
+for i in range(1,len(lect)):
+    # 강의 종료 시간(ex. 3) <= 다음 강의 시작 시간(ex. 4) 
+    if room[0] <= lect[i][0]:
+        # 강의 연장
+        heapq.heappop(room) # 현재 강의 종료 시간 빼고 
+        heapq.heappush(room,lect[i][1]) # 다음 강의 종료 시간 추가 
+    # 강의 종료 시간 > 다음 강의 시간 
+    else:
+        # 새로운 강의실 추가 
+        heapq.heappush(room,lect[i][1])
 
-
-graph = []
-
-for i in range(len(sorttime)):
-    
-    
-    
-    
-    
+print(len(room))
