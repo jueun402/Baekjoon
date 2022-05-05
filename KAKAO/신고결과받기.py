@@ -53,8 +53,6 @@ print(answer)
 
 # 02. 내 풀이랑 비슷한데 더 효율적인 방법
 
-
-
 answer = {x : 0 for x in id_list}
 dict = {x : [] for x in id_list}  # key (신고당한사람) : value (신고자) 
 
