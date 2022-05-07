@@ -1,5 +1,5 @@
 ## BFS/DFS
-[BFS/DFS 란? ](https://www.notion.so/2-1ff26adbd2b64f8da5525fcf797cefa0)
+[BFS/DFS 란? ](https://www.notion.so/playdatacademy/3-ce9db65d00e94d68be57342694701d45)
 
 - 관련 내용
   - 프로그래머스
