@@ -34,7 +34,7 @@ def bfs():
     
     dx, dy = [-1,1,0,0], [0,0,-1,1]
 
-    maze[0][0] = 2 # 0,0이 1이면 계속 더해짐 
+    # maze[0][0] = 2 # 0,0이 1이면 계속 더해짐 
     
     while queue:
         y, x = queue.popleft()
@@ -49,4 +49,5 @@ def bfs():
 bfs()
 
 # 0,0에 1을 더해줬으니 마지막에 빼줌 
-print(maze[n-1][m-1]-1)
+print(maze[n-1][m-1])
+

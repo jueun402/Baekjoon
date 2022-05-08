@@ -56,3 +56,27 @@ dfs(graph, 1, visited)
 for i in range(2,n+1):
     print(result[i])
 
+
+
+import sys
+
+n = int(input())
+graph = [[] for _ in range(n+1)]
+visited = [False]*(n+1)
+result = {}
+
+for i in range(n-1):
+    u, v = map(int,sys.stdin.readline().split())
+    graph[u].append(v)
+    graph[v].append(u)
+
+
+def dfs(graph, v ,visited):
+    visited [v]=True # 방문 처리 
+    print(v,end='')
+    
+    for i in graph[v]:
+        #  방문하지 않았다면 
+        if not visited[i]: 
+            result[i] = v  # i노드의 부모는 v 
+            dfs(graph,i,visited)
